@@ -3,11 +3,12 @@ import sendgrid
 from sendgrid.helpers.mail import Mail, Substitution, Attachment, Content, Personalization
 from .error import Error
 from rest_framework import status
+from .decorator import run_async
 
 
 class Email:
 
-    @staticmethod
+    @run_async
     def send_email(receivers, subject, content, template_id=None, text_replacements=None,
                    sender_name=None, sender_email=None,
                    attachments=None, cc_list=None, bcc_list=None):
