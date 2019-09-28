@@ -4,6 +4,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db import transaction
+from .Serializer.email_serializer import EmailSerializer
 
 
 class SendEmailView(generics.CreateAPIView):
@@ -21,7 +22,10 @@ class SendEmailView(generics.CreateAPIView):
             return Response({'detail': 'Please eneter yout id'},
                             status=status.HTTP_400_BAD_REQUEST
                             )
-        serializer_class = EmailSerializer(data=request.data)
+        list_cc = request.data.get('cc')
+        list_bcc = request.data.get('bcc')
+        context = {'data':request.data, 'cc':list_cc, 'bcc': list_bcc}
+        serializer_class = EmailSerializer(data=request.data, context=context)
         transaction.set_autocommit(False)
         try:
             if serializer_class.is_valid():
