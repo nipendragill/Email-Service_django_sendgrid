@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from .views import SendEmailView
 urlpatterns = [
-    url(r'^send_email/?$', custom_jwt.CustomTokenObtainPairView.as_view(), name='login')
+    url(r'^send_email/?$', SendEmailView.as_view(), name='login')
     ]
