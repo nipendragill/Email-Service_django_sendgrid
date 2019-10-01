@@ -12,6 +12,7 @@ class Email:
     def send_email(receivers, subject, content, template_id=None, text_replacements=None,
                    sender_name=None, sender_email=None,
                    attachments=None, cc_list=None, bcc_list=None):
+        print(os.environ.get('SENDGRID_API_KEY'), '   is the sendgrid api key')
         sendgrid_client = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
         sender = sendgrid.Email(name=sender_name, email=sender_email)
         mail = Mail(from_email=sender, subject=subject, content=content)

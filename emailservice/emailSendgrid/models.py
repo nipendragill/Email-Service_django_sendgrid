@@ -13,19 +13,19 @@ class EmailModel(models.Model):
 
 class EmailReceiverTo(models.Model):
 
-    email = models.ForeignKey(EmailModel)
+    email = models.ForeignKey(EmailModel, on_delete=models.CASCADE)
     receivers = models.EmailField(max_length=30)
 
 
 class EmailReceiverCC(models.Model):
 
-    email = models.ForeignKey(EmailModel)
+    email = models.ForeignKey(EmailModel, on_delete=models.CASCADE)
     cc  = models.EmailField(max_length=30)
 
 
 class EmailReceiverBCC(models.Model):
 
-    email = models.ForeignKey(models.Model)
+    email = models.ForeignKey(EmailModel, on_delete=models.CASCADE)
     bcc = models.EmailField(max_length=30)
 
 
